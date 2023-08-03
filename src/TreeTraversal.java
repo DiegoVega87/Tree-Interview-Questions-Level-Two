@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class TreeTraversal {
 
     /*
@@ -24,4 +27,39 @@ public class TreeTraversal {
     *
     *   Output: [2,3,4,5,6]
     * */
+
+    public List<Integer> inorderTraversal(TreeNode root){
+
+        if(root == null){
+            return null;
+        }
+
+        List<Integer> list = new ArrayList<>();
+
+        inorderTraversal(root, list);
+
+        return list;
+    }
+
+    private void inorderTraversal(TreeNode root, List<Integer> list){
+
+        if(root == null){
+            return;
+        }
+
+        inorderTraversal(root.left, list);
+        list.add(root.val);
+        inorderTraversal(root.right, list);
+
+    }
+}
+
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    TreeNode(int x) {
+        val = x;
+    }
 }
