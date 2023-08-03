@@ -1,3 +1,8 @@
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 public class TreeTraversal2 {
 
     /*
@@ -36,4 +41,8 @@ public class TreeTraversal2 {
     *   Level 2: 3 -> 2
     *   Level 3: 4 -> 5 -> 6
     * */
+
+    public List<Integer>zigzagTraversal(TreeNode root){
+
+    }
 }
