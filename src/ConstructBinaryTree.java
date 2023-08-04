@@ -7,6 +7,18 @@ public class ConstructBinaryTree {
     * root, right subtree). Can you help us implement a function that takes in these two arrays and returns the binary
     * tree?
     *
+    * Example 1:
     *
-     * */
+    * preorder = [3,9,20,15,7]
+    * inorder = [9,3,15,20,7]
+    *
+    *           Output:
+    *         3
+    *        / \
+    *       9  20
+    *         /  \
+    *        15   7
+    *
+    *
+    * */
 }
