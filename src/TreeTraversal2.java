@@ -44,5 +44,41 @@ public class TreeTraversal2 {
 
     public List<Integer>zigzagTraversal(TreeNode root){
 
+        List<Integer> result = new ArrayList<>();
+
+        if(root == null){
+            return result;
+        }
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        boolean leftToRight = true;
+
+        while(!queue.isEmpty()){
+
+            int levelSize = queue.size();
+            LinkedList<Integer> values = new LinkedList<>();
+            for(int i = 0; i < levelSize; i++){
+                TreeNode temp = queue.remove();
+
+                if(leftToRight){
+                    values.add(temp.val);
+                }else{
+                    values.addFirst(temp.val);
+                }
+
+                if(temp.left != null){
+                    queue.add(temp.left);
+                }
+                if(temp.right != null){
+                    queue.add(temp.right);
+                }
+            }
+            result.addAll(values);
+            leftToRight = !leftToRight;
+
+        }
+
+        return result;
     }
 }
