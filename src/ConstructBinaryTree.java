@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class ConstructBinaryTree {
 
     /*
@@ -21,4 +24,40 @@ public class ConstructBinaryTree {
     *
     *
     * */
+    public TreeNode buildTree(int[] preorder, int[] inorder){
+        if(preorder == null || inorder == null || preorder.length != inorder.length){
+            return null;
+        }
+
+        Map<Integer,Integer>inValueIndex = new HashMap<>();
+        for(int i = 0; i < inorder.length; i++){
+            inValueIndex.put(inorder[i], i);
+        }
+
+        return treeBuilder(preorder, 0, preorder.length-1, inorder, 0,
+                inorder.length-1, inValueIndex);
+    }
+
+    private TreeNode treeBuilder(int[] pre, int preStart, int preEnd, int[] in,int  inStart, int inEnd,
+                                 Map<Integer, Integer>map){
+
+        if(preStart > preEnd || inStart > inEnd){
+            return null;
+        }
+
+        TreeNode root = new TreeNode(pre[preStart]);
+        int rootInIndex = map.get(root.val);
+        int numOfLeftNodes = rootInIndex - inStart;
+
+        root.left = treeBuilder(pre, preStart+1, preStart + numOfLeftNodes,
+                in, rootInIndex+1, inEnd, map);
+        root.right = treeBuilder(pre, preStart+numOfLeftNodes + 1, preEnd, in,
+                rootInIndex + 1, inEnd, map);
+
+        return root;
+
+    }
+
+
+
 }
