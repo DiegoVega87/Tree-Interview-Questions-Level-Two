@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class FindingKthSmallest {
 
     /*
@@ -29,5 +32,35 @@ public class FindingKthSmallest {
     * k = 6
     * Output: 18
     * Explanation: The 6th smallest product in the tree is 18.
+    *
     * */
+
+    public static int findKthSmallestProduct(TreeNode root, int k){
+
+        if(root == null ){
+            return -1;
+        }
+
+        List<Integer> values = new ArrayList<>();
+        inorderTraversal(root, values);
+
+        if(k > values.size() || k < 1){
+            return -1;
+        }
+
+        return values.get(k-1);
+    }
+
+    private static void inorderTraversal(TreeNode root, List<Integer> values){
+
+        if(root == null){
+            return;
+        }
+
+        inorderTraversal(root.left, values);
+        values.add(root.val);
+        inorderTraversal(root.right, values);
+    }
+
+
 }
