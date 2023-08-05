@@ -25,38 +25,38 @@ public class ConstructBinaryTree {
     *
     * */
     public TreeNode buildTree(int[] preorder, int[] inorder){
-        if(preorder == null || inorder == null || preorder.length != inorder.length){
+
+        if(preorder == null || inorder == null || inorder.length != preorder.length) {
             return null;
         }
-        Map<Integer,Integer>inValueIndex = new HashMap<>();
+
+        Map<Integer, Integer> inorderValIndexPairs = new HashMap<>();
         for(int i = 0; i < inorder.length; i++){
-            inValueIndex.put(inorder[i], i);
+            inorderValIndexPairs.put(inorder[i], i);
         }
 
-        return treeBuilder(preorder, 0, preorder.length-1, 0,
-                inorder.length-1, inValueIndex);
+        return treeBuilder(preorder, 0, preorder.length, 0, inorder.length, inorderValIndexPairs);
     }
 
-    private TreeNode treeBuilder(int[] pre, int preStart, int preEnd, int  inStart, int inEnd,
-                                 Map<Integer, Integer>map){
+    private TreeNode treeBuilder(int[] preorder, int preStart, int preEnd,
+                                 int inStart, int inEnd, Map<Integer, Integer> map){
 
         if(preStart > preEnd || inStart > inEnd){
             return null;
         }
 
-        TreeNode root = new TreeNode(pre[preStart]);
-        int rootInIndex = map.get(root.val);
-        int numOfLeftNodes = rootInIndex - inStart;
+        TreeNode root = new TreeNode(preorder[preStart]);
+        int rootIndex = map.get(root.val);
+        int numNodesLeft = rootIndex - inStart;
 
-        root.left = treeBuilder(pre, preStart+1, preStart + numOfLeftNodes,
-                inStart, rootInIndex-1, map);
-        root.right = treeBuilder(pre, preStart+numOfLeftNodes + 1, preEnd,
-                rootInIndex + 1, inEnd, map);
+        root.left = treeBuilder(preorder, preStart+1, preStart+numNodesLeft,
+                inStart, rootIndex -1, map);
+
+        root.right = treeBuilder(preorder, preStart + numNodesLeft+1,
+                preEnd, rootIndex + 1, inEnd, map);
 
         return root;
 
     }
-
-
 
 }
